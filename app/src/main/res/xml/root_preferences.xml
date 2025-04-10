@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/settings_general">
+
+        <ListPreference
+            android:key="language"
+            android:title="@string/language_select"
+            android:entries="@array/supported_languages"
+            android:entryValues="@array/supported_languages_values"
+            android:defaultValue="en"
+            android:summary="%s" />
+
+        <ListPreference
+            android:key="theme"
+            android:title="@string/theme_select"
+            android:entries="@array/theme_options"
+            android:entryValues="@array/theme_values"
+            android:defaultValue="system"
+            android:summary="%s" />
+
+        <SwitchPreferenceCompat
+            android:key="enable_notifications"
+            android:title="@string/enable_notifications"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
