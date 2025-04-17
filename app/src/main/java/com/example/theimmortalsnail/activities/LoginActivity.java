@@ -35,7 +35,7 @@ public class LoginActivity extends BaseActivity {
 
         loginButton.setOnClickListener(v -> showLoginDialog());
         registerButton.setOnClickListener(v -> showRegisterDialog());
-        exitButton.setOnClickListener(v -> finish());
+        exitButton.setOnClickListener(v -> closeActivity());
     }
 
     private void showLoginDialog() {
@@ -43,9 +43,9 @@ public class LoginActivity extends BaseActivity {
         final LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_login, null);
 
         new AlertDialog.Builder(this)
-                .setTitle("Login")
+                .setTitle(R.string.login)
                 .setView(layout)
-                .setPositiveButton("Login", (dialog, which) -> {
+                .setPositiveButton(R.string.dialog_log, (dialog, which) -> {
                     EditText nameField = layout.findViewById(R.id.nameField);
                     EditText passwordField = layout.findViewById(R.id.passwordField);
 
@@ -58,7 +58,7 @@ public class LoginActivity extends BaseActivity {
                         Toast.makeText(this, "Fields can't be empty", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(R.string.dialog_cancel, null)
                 .show();
     }
 
@@ -67,9 +67,9 @@ public class LoginActivity extends BaseActivity {
         final LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_register, null);
 
         new AlertDialog.Builder(this)
-                .setTitle("Register")
+                .setTitle(R.string.register)
                 .setView(layout)
-                .setPositiveButton("Register", (dialog, which) -> {
+                .setPositiveButton(R.string.dialog_register, (dialog, which) -> {
                     EditText nameField = layout.findViewById(R.id.nameField);
                     EditText passField = layout.findViewById(R.id.passwordField);
                     EditText confirmField = layout.findViewById(R.id.confirmPasswordField);
@@ -90,7 +90,7 @@ public class LoginActivity extends BaseActivity {
 
                     new RegisterTask(this).execute(name, pass);
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(R.string.dialog_cancel, null)
                 .show();
     }
 

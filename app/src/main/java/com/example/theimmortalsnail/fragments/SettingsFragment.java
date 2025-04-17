@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.theimmortalsnail.activities.BaseActivity;
-import com.example.theimmortalsnail.NotificationHelper;
+import com.example.theimmortalsnail.helpers.NotificationHelper;
 import com.example.theimmortalsnail.R;
 
 import java.util.Locale;

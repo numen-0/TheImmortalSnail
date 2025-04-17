@@ -12,7 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.preference.PreferenceManager;
 
-import com.example.theimmortalsnail.NotificationHelper;
+import com.example.theimmortalsnail.helpers.NotificationHelper;
 import com.example.theimmortalsnail.R;
 
 public class ConfigActivity extends BaseActivity {

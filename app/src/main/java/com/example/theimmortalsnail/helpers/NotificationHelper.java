@@ -1,4 +1,4 @@
-package com.example.theimmortalsnail;
+package com.example.theimmortalsnail.helpers;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.theimmortalsnail.R;
 import com.example.theimmortalsnail.activities.MainActivity;
 
 import java.util.Calendar;

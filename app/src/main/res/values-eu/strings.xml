@@ -5,7 +5,6 @@
     <string name="settings_game">Jokoa</string>
     <string name="play">Jolastu</string>
     <string name="settings">Ezarpenak</string>
-    <string name="MC_select">Morse kode estandarra</string>
     <string name="language_select">Hizkuntza</string>
     <string name="cheat_sheet">Gida</string>
     <string name="editor">Editorea</string>
@@ -18,14 +17,6 @@
     <string name="edit_rep">Errepresentazioa Editatu</string>
     <string name="edit_seq">Sekuentzia Editatu</string>
     <string name="invalid_input">Sarrera Okerra</string>
-    <string name="add_new_morse_char">Morse Karaktere Berria Gehitu</string>
-    <string name="enter_character">Karakterea</string>
-    <string name="duplicated_entry">Sarrera Errepikatua</string>
-    <string name="enter_morse_code">Sekuentzia</string>
-    <string name="char_added">Karakterea Gehituta</string>
-    <string name="delete_title">Ezabatu</string>
-    <string name="char_deleted">Karakterea Ezabatuta</string>
-    <string name="edit_del">Ezabatu</string>
     <string name="theme_select">Estiloa</string>
     <string name="error_empty_name">Estandar izena utzik!</string>
     <string name="ok_new_std">Estandar berria sortu da!</string>
@@ -36,9 +27,6 @@
     <string name="error_one_std">Gutxienez estandar bat mantendu behar da</string>
     <string name="msg_confirm_del">"Berretsi Ezabatu "</string>
     <string name="msg_are_you_sure">Ziur zaude ezabatu nahi duzula</string>
-    <string name="error_std_404">"Estandarra ez da existitzen "</string>
-    <string name="ok_std_deleted">"Estandarra ezabatu da! "</string>
-    <string name="msg_select_std_edit">"Hautatu estandar bat editatzeko "</string>
     <string name="ok_updated">eguneratua!</string>
     <string name="enable_notifications">Gaitu notifikazioak</string>
     <string name="not_word_of_the_day">Eguneko Hitza!</string>
@@ -55,4 +43,12 @@
     <string name="col_distance">bidaiatu:</string>
     <string name="col_time">denbora:</string>
     <string name="col_max">max distantzia:</string>
+    <string name="dialog_name">Izena</string>
+    <string name="dialog_pass">Pasahitza</string>
+    <string name="dialog_confirm_pass">Pasahitza Konfirmatu</string>
+    <string name="dialog_log">sartu</string>
+    <string name="dialog_cancel">utzi</string>
+    <string name="dialog_register">erregistratu</string>
+    <string name="focus">zentratu</string>
+    <string name="msg_location_perm">Kokapen-baimena beharrezkoa da mapa erabiltzeko.</string>
 </resources>

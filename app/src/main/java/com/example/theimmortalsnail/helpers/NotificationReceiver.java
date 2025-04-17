@@ -1,4 +1,4 @@
-package com.example.theimmortalsnail;
+package com.example.theimmortalsnail.helpers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,10 +7,6 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

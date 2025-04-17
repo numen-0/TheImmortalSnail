@@ -32,7 +32,14 @@ public class HistoryEntry {
         return roundDistance(maxDistance);
     }
 
-    private String roundDistance(long d) {
+    public static String roundDistance(double d) {
+        if (d >= 1000.0d) {
+            return String.format(Locale.US, "%.1fkm", d / 1000.0d);
+        } else {
+            return String.format(Locale.US, "%.1fm", d);
+        }
+    }
+    public static String roundDistance(long d) {
         if (d >= 1000) {
             float km = d / 1000f;
             return String.format(Locale.US, "%.1fkm", km);

@@ -1,11 +1,9 @@
 package com.example.theimmortalsnail.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -15,8 +13,7 @@ import com.example.theimmortalsnail.R;
 import com.example.theimmortalsnail.fragments.AchievementsFragment;
 import com.example.theimmortalsnail.fragments.HistoryFragment;
 
-public class UserProfileActivity extends AppCompatActivity {
-    private Integer userId;
+public class UserProfileActivity extends BaseActivity {
     private boolean isHistoryShowing;
 
     @Override
@@ -29,9 +26,6 @@ public class UserProfileActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        this.userId = (Integer) getIntent().getSerializableExtra("user");
-        assert this.userId != null;
 
         Button switchButton = findViewById(R.id.switchButton);
         getSupportFragmentManager().beginTransaction()
@@ -56,13 +50,6 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         Button button = findViewById(R.id.backButton);
-        button.setOnClickListener(v -> openMainActivity());
-    }
-
-    public void openMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("user", this.userId);
-        startActivity(intent);
-        finish();
+        button.setOnClickListener(v -> closeActivity());
     }
 }

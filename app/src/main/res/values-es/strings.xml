@@ -5,7 +5,6 @@
     <string name="settings_game">Juego</string>
     <string name="play">Jugar</string>
     <string name="settings">Ajustes</string>
-    <string name="MC_select">Código Morse estándar</string>
     <string name="language_select">Idioma</string>
     <string name="cheat_sheet">Guía</string>
     <string name="editor">Editor</string>
@@ -18,14 +17,6 @@
     <string name="edit_rep">Editar Representación</string>
     <string name="edit_seq">Editar Sequencia</string>
     <string name="invalid_input">Entrada Invalida</string>
-    <string name="add_new_morse_char">Añadir Caracter Morse Nuevo</string>
-    <string name="enter_character">Caracter</string>
-    <string name="duplicated_entry">Entrada Duplicada</string>
-    <string name="enter_morse_code">Secuencia</string>
-    <string name="char_added">Caracter Añadido</string>
-    <string name="delete_title">Eliminar</string>
-    <string name="char_deleted">Caracter Eliminado</string>
-    <string name="edit_del">Eliminar</string>
     <string name="theme_select">Estilo</string>
     <string name="error_empty_name">¡El nombre estándar no puede estar vacío!</string>
     <string name="ok_new_std">"¡Nuevo estándar creado! "</string>
@@ -36,15 +27,12 @@
     <string name="error_one_std">"Al menos un estándar debe permanecer "</string>
     <string name="msg_confirm_del">"Confirmar eliminación "</string>
     <string name="msg_are_you_sure">¿Estás seguro de que quieres eliminar</string>
-    <string name="error_std_404">"El estándar no existe "</string>
-    <string name="ok_std_deleted">"¡Estándar eliminado! "</string>
-    <string name="msg_select_std_edit">"Seleccione un estándar para editar "</string>
     <string name="ok_updated">actualizada!</string>
     <string name="enable_notifications">Habilitar notificaciones</string>
     <string name="not_word_of_the_day">¡Palabra del día!</string>
     <string name="exit">Salir</string>
     <string name="login">Entrar</string>
-    <string name="register">Registrar</string>
+    <string name="register">Registrarse</string>
     <string name="confirm_password">confirmar contraseña</string>
     <string name="shop">Tienda</string>
     <string name="account">Perfil</string>
@@ -55,4 +43,12 @@
     <string name="col_min">min distancia:</string>
     <string name="col_distance">movido:</string>
     <string name="col_time">tiempo:</string>
+    <string name="dialog_name">Nombre</string>
+    <string name="dialog_pass">Contraseña</string>
+    <string name="dialog_confirm_pass">Confirmar Contraseña</string>
+    <string name="dialog_log">entrar</string>
+    <string name="dialog_cancel">cancelar</string>
+    <string name="dialog_register">registrarse</string>
+    <string name="focus">centrar</string>
+    <string name="msg_location_perm">Se requiere permiso de ubicación para utilizar el mapa.</string>
 </resources>
