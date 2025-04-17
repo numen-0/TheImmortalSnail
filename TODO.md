@@ -1,10 +1,12 @@
 # TODO
+* add
+  * logout button in main
 * map activity
+  * new game (choose a name and a picture for the snail)
   * show your location + the snail
 * profile
-  * change name
-  * see records
-  * change profile pic
+  * landscape
+  * get data from DB
 * DB
   * make the thing
 * extra:

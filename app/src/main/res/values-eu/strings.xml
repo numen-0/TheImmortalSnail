@@ -49,4 +49,10 @@
     <string name="shop">Denda</string>
     <string name="account">Profila</string>
     <string name="map">Mapa</string>
+    <string name="history">historiala</string>
+    <string name="achievements">lorpenak</string>
+    <string name="col_min">min distantzia:</string>
+    <string name="col_distance">bidaiatu:</string>
+    <string name="col_time">denbora:</string>
+    <string name="col_max">max distantzia:</string>
 </resources>

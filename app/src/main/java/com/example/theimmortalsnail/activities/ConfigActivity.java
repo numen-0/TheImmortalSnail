@@ -1,6 +1,5 @@
-package com.example.theimmortalsnail;
+package com.example.theimmortalsnail.activities;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -8,15 +7,15 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.preference.PreferenceManager;
 
-public class ConfigActivity extends AppCompatActivity {
+import com.example.theimmortalsnail.NotificationHelper;
+import com.example.theimmortalsnail.R;
 
-    private Integer userId;
+public class ConfigActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +30,7 @@ public class ConfigActivity extends AppCompatActivity {
         });
 
         Button button = findViewById(R.id.backButton);
-        button.setOnClickListener(v -> openMainActivity());
-
-        this.userId = (Integer) getIntent().getSerializableExtra("user");
-        assert this.userId != null;
-    }
-
-    public void openMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("user", this.userId);
-        startActivity(intent);
-        finish();
+        button.setOnClickListener(v -> this.closeActivity());
     }
 
     @Override

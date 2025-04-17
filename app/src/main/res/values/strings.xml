@@ -50,8 +50,13 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="confirm_password">confirm password</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="shop">Shop</string>
     <string name="account">Profile</string>
     <string name="map">Map</string>
+    <string name="history">history</string>
+    <string name="achievements">achievements</string>
+    <string name="col_max">max distance:</string>
+    <string name="col_min">min distance:</string>
+    <string name="col_distance">crawled:</string>
+    <string name="col_time">time:</string>
 </resources>

@@ -15,6 +15,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.theimmortalsnail.activities.MainActivity;
+
 import java.util.Calendar;
 
 public class NotificationHelper {

@@ -1,4 +1,4 @@
-package com.example.theimmortalsnail;
+package com.example.theimmortalsnail.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +12,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.example.theimmortalsnail.activities.BaseActivity;
+import com.example.theimmortalsnail.NotificationHelper;
+import com.example.theimmortalsnail.R;
 
 import java.util.Locale;
 
@@ -89,9 +93,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         );
 
         // Restart activity to apply changes
-        Intent intent = requireActivity().getIntent();
-        requireActivity().finish();
-        startActivity(intent);
+        ((BaseActivity) requireActivity()).restartAppWithSettings();
     }
 
     @Override

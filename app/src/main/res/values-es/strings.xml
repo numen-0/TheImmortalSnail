@@ -49,4 +49,10 @@
     <string name="shop">Tienda</string>
     <string name="account">Perfil</string>
     <string name="map">Mapa</string>
+    <string name="history">historial</string>
+    <string name="achievements">logros</string>
+    <string name="col_max">max distancia:</string>
+    <string name="col_min">min distancia:</string>
+    <string name="col_distance">movido:</string>
+    <string name="col_time">tiempo:</string>
 </resources>

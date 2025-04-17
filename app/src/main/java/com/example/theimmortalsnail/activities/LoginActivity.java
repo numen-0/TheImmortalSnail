@@ -1,15 +1,15 @@
-package com.example.theimmortalsnail;
+package com.example.theimmortalsnail.activities;
 
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.*;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.theimmortalsnail.R;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -17,7 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     Button loginButton, registerButton, exitButton;
 
@@ -135,8 +135,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.has("user")) {
                     JSONObject user = response.getJSONObject("user");
                     int userId = user.getInt("id");
+                    // TODO poner esto al singletone y q haga su trabajo
                     Toast.makeText(activity, "Login successful", Toast.LENGTH_SHORT).show();
-                    activity.openMainActivity(userId);
+                    activity.openActivity(MainActivity.class);
+                    activity.closeActivity();
                 } else if (response.has("error")) {
                     Toast.makeText(activity, "Error: " + response.getString("error"), Toast.LENGTH_LONG).show();
                 } else {
@@ -187,13 +189,6 @@ public class LoginActivity extends AppCompatActivity {
             System.out.println(result);
             Toast.makeText(context, "Register: " + result, Toast.LENGTH_LONG).show();
         }
-    }
-
-    public void openMainActivity(int userId) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("user", userId);
-        startActivity(intent);
-        finish();
     }
 }
 
