@@ -12,19 +12,6 @@ public class Achievement {
     private String es_desc;
     private boolean done;
 
-    public Achievement(String description, boolean done) { // TODO: delete
-        if ( description == null || description.isBlank() ) {
-            this.en_desc = "???";
-            this.eu_desc = "???";
-            this.es_desc = "???";
-        } else {
-            this.en_desc = description;
-            this.eu_desc = description;
-            this.es_desc = description;
-        }
-        this.done = done;
-    }
-
     public Achievement(String en_desc, String eu_desc, String es_desc, boolean done) {
         this.en_desc = en_desc;
         this.eu_desc = eu_desc;

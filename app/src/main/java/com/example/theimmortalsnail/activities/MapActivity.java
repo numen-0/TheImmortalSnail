@@ -48,11 +48,12 @@ public class MapActivity extends BaseActivity {
     private LocationCallback locationCallback;
     private boolean pause;
     private boolean wait;
+    private boolean end;
     private float totalDistance;
     private float distanceFromUser;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
-    private static final double SNAIL_SPEED_METERS = 1.0d;
+    private static final double SNAIL_SPEED_METERS = 100.0d;
     private static final long UPDATE_INTERVAL_MS = 3000; // 3 seconds
 
 
@@ -69,6 +70,7 @@ public class MapActivity extends BaseActivity {
 
         this.totalDistance = 0.0f;
         this.distanceFromUser = 0.0f;
+        this.end = false;
 
         Configuration.getInstance().load(getApplicationContext(),
                 PreferenceManager.getDefaultSharedPreferences(this));
@@ -86,8 +88,7 @@ public class MapActivity extends BaseActivity {
 
         // Distance Text
         this.distanceText = findViewById(R.id.distanceTextView);
-
-        // Map
+ // Map
         this.mapView = findViewById(R.id.map);
         this.playerLocation = new GeoPoint(0.0f, 0.0f);
         this.snailLocation = new GeoPoint(0.0f, 0.0f);
@@ -102,7 +103,7 @@ public class MapActivity extends BaseActivity {
 
                 // Update and Focus
                 locationCallback.onLocationResult(locationResult);
-                final int radius = (new Random().nextInt() % 3500) + 1000; // [4500, 5499]
+                final int radius = (new Random().nextInt() % 3500) + 1000; // [1000, 4499]
                 final double deg = new Random().nextDouble() * Math.PI * 2;
                 double deltaLat = radius * Math.sin(deg) / 111320.0;
                 double deltaLon = radius * Math.cos(deg) / (40008000.0 / 360.0);
@@ -234,21 +235,24 @@ public class MapActivity extends BaseActivity {
     }
 
     private void endGame() {
+        if (this.end) { return; }
         Activity activity = this;
         sendSnailUpdateToServer();
         DBHelper.endRun(MapHelper.snailId, new DBHelper.GenericCallback() {
             @Override
             public void onSuccess(String message, Integer snailId) {
-                Toast.makeText(activity, "Game saved successfully", Toast.LENGTH_SHORT).show();
+                runOnUiThread(() -> Toast.makeText(activity, "Game saved successfully", Toast.LENGTH_SHORT).show());
             }
             @Override
             public void onError(Exception e) {
-                Toast.makeText(activity, "Error saving game", Toast.LENGTH_SHORT).show();
+                runOnUiThread(() -> Toast.makeText(activity, "Error saving game", Toast.LENGTH_SHORT).show());
             }
         });
     }
     private void gameOver() {
+        if (this.end) { return; }
         endGame();
+        this.end = true;
 
         // Create an AlertDialog to show the "Game Over" message
         new AlertDialog.Builder(this)
@@ -293,13 +297,13 @@ public class MapActivity extends BaseActivity {
         DBHelper.updateSnailRunDistance(snailId, totalDistance, distanceFromUser, new DBHelper.GenericCallback() {
             @Override
             public void onSuccess(String message, Integer unused) {
-                // Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                // activity.runOnUiThread(() -> Toast.makeText(activity, message, Toast.LENGTH_SHORT).show());
             }
 
             @Override
             public void onError(Exception e) {
                 e.printStackTrace();
-                Toast.makeText(activity, "Failed to update distance", Toast.LENGTH_SHORT).show();
+                // runOnUiThread(() -> Toast.makeText(activity, "Failed to update distance", Toast.LENGTH_SHORT).show());
             }
         });
     }

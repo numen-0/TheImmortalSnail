@@ -44,7 +44,8 @@ public class MapHelper {
         boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
         if (!isGpsEnabled && !isNetworkEnabled) {
-            Toast.makeText(activity, "Please enable location services", Toast.LENGTH_LONG).show();
+            activity.runOnUiThread(() -> Toast.makeText(activity, "Please enable location services", Toast.LENGTH_LONG).show());
+
             activity.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
         } else {
             showSnailNameDialog(activity);
@@ -65,9 +66,9 @@ public class MapHelper {
             String snailName = input.getText().toString().trim();
             MapHelper.snailName = snailName;
             if (snailName.isEmpty()) {
-                Toast.makeText(activity, "The snail needs a name!", Toast.LENGTH_SHORT).show();
+                activity.runOnUiThread(() -> Toast.makeText(activity, "The snail needs a name!", Toast.LENGTH_SHORT).show());
             } else {
-                Toast.makeText(activity, "Snail '" + snailName + "' is ready!", Toast.LENGTH_SHORT).show();
+                activity.runOnUiThread(() -> Toast.makeText(activity, "Snail '" + snailName + "' is ready!", Toast.LENGTH_SHORT).show());
 
                 DBHelper.startNewRun(snailName, new DBHelper.GenericCallback() {
                     @Override
@@ -78,7 +79,7 @@ public class MapHelper {
 
                     @Override
                     public void onError(Exception e) {
-                        Toast.makeText(activity, "Error creating snail: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        activity.runOnUiThread(() -> Toast.makeText(activity, "Error creating snail: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                     }
                 });
             }
