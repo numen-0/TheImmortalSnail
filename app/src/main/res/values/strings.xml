@@ -58,4 +58,5 @@
     <string name="app_widget_description" translatable="false">cool snail widget</string>
     <string name="no_achievements">no achievements</string>
     <string name="no_runs">no runs</string>
+    <string name="name_your_snail">Name your snail</string>
 </resources>

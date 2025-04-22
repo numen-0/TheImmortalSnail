@@ -74,7 +74,27 @@ public class DBHelper {
             callback.onError(e);
             return;
         }
-        new PostJsonTask(url, body, callback).execute();
+        new PostJsonTask(url, body, new GenericCallback() {
+            @Override
+            public void onSuccess(String response, Integer unused) {
+                try {
+                    JSONObject json = new JSONObject(response);
+                    if (json.has("snail_id")) {
+                        int snailId = json.getInt("snail_id");
+                        callback.onSuccess(json.getString("message"), snailId);
+                    } else {
+                        callback.onError(new Exception("No snail_id returned"));
+                    }
+                } catch (Exception e) {
+                    callback.onError(e);
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                callback.onError(e);
+            }
+        }).execute();
     }
 
 
@@ -93,18 +113,41 @@ public class DBHelper {
     }
 
     // Update distance
-    public static void updateRunDistance(int snailId, float distance, GenericCallback callback) {
+    public static void updateSnailRunDistance(int snailId, float distance, float distanceFromUser, GenericCallback callback) {
         String url = DBHelper.SERVER_URL + "run_update.php";
         JSONObject body = new JSONObject();
+
         try {
+            // Pass the required fields (user_id, snail_id, and distance) as JSON
             body.put("user_id", DBHelper.userId);
             body.put("snail_id", snailId);
             body.put("distance", distance);
+            body.put("distance_from_user", distanceFromUser);
         } catch (Exception e) {
             callback.onError(e);
             return;
         }
-        new PostJsonTask(url, body, callback).execute();
+
+        new PostJsonTask(url, body, new GenericCallback() {
+            @Override
+            public void onSuccess(String response, Integer unused) {
+                try {
+                    JSONObject json = new JSONObject(response);
+                    if (json.has("message")) {
+                        callback.onSuccess(json.getString("message"), null);
+                    } else {
+                        callback.onError(new Exception("No message returned"));
+                    }
+                } catch (Exception e) {
+                    callback.onError(e);
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                callback.onError(e);
+            }
+        }).execute();
     }
 
     private static class SnailFetcher extends AsyncTask<Void, Void, List<SnailRecord>> {
@@ -198,9 +241,12 @@ public class DBHelper {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                callback.onSuccess(result);
+                callback.onSuccess(result, null);
+            } else {
+                callback.onError(new Exception("Empty response"));
             }
         }
+
     }
 
     public static void getAchievements(Context context, AchievementCallback callback) {
@@ -305,7 +351,7 @@ public class DBHelper {
     }
 
     public interface GenericCallback {
-        void onSuccess(String message);
+        void onSuccess(String message, Integer snailId); // Updated
         void onError(Exception e);
     }
 
@@ -313,7 +359,6 @@ public class DBHelper {
         void onResult(List<Achievement> achievements);
         void onError(Exception e);
     }
-
 }
 
 /* DB structure

@@ -11,7 +11,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.theimmortalsnail.R;
+import com.example.theimmortalsnail.helpers.DBHelper;
 import com.example.theimmortalsnail.helpers.MapHelper;
+
+import org.json.JSONObject;
 
 public class MainActivity extends BaseActivity {
 
