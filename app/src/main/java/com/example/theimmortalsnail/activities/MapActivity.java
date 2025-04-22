@@ -53,7 +53,7 @@ public class MapActivity extends BaseActivity {
     private float distanceFromUser;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
-    private static final double SNAIL_SPEED_METERS = 100.0d;
+    private static final double SNAIL_SPEED_METERS = 0.5d;
     private static final long UPDATE_INTERVAL_MS = 3000; // 3 seconds
 
 
