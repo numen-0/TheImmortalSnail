@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="alfonso"
+        android:text=""
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/profilePic"
@@ -75,7 +75,7 @@
             <TextView
                 android:id="@+id/timeVal"
                 android:padding="4dp"
-                android:text="01:32:45" />
+                android:text="" />
         </TableRow>
 
         <TableRow android:id="@+id/distanceRow">
@@ -88,7 +88,7 @@
             <TextView
                 android:id="@+id/distanceVal"
                 android:padding="4dp"
-                android:text="3.4 km" />
+                android:text="" />
         </TableRow>
 
         <TableRow android:id="@+id/maxDistance">
@@ -101,7 +101,7 @@
             <TextView
                 android:id="@+id/maxDistanceVal"
                 android:padding="4dp"
-                android:text="1.1km" />
+                android:text="" />
         </TableRow>
 
         <TableRow android:id="@+id/minDistance">
@@ -114,7 +114,7 @@
             <TextView
                 android:id="@+id/minDistanceVal"
                 android:padding="4dp"
-                android:text="200m" />
+                android:text="" />
         </TableRow>
     </TableLayout>
 

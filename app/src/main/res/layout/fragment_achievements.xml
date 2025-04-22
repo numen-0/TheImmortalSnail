@@ -14,5 +14,12 @@
         android:divider="@android:color/darker_gray"
         android:showDividers="middle"
         android:dividerPadding="8dp">
+        <TextView
+            android:id="@+id/noAchievementsMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_achievements"
+            android:visibility="gone"
+            android:layout_gravity="center"/>
     </LinearLayout>
 </ScrollView>

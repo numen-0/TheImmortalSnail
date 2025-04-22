@@ -1,13 +1,11 @@
 # TODO
-* add
-  * logout button in main
 * map activity
   * new game (choose a name and a picture for the snail)
-  * show your location + the snail
+  * horizontal view
 * profile
-  * landscape
+  * save/edit pic
   * get data from DB
-* DB
+* php
   * make the thing
 * extra:
   * widget (show distance from the snail)

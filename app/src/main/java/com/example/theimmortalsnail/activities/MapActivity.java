@@ -3,18 +3,24 @@ package com.example.theimmortalsnail.activities;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.preference.PreferenceManager;
 
 import com.example.theimmortalsnail.R;
-import com.example.theimmortalsnail.models.HistoryEntry;
+import com.example.theimmortalsnail.helpers.MapHelper;
+import com.example.theimmortalsnail.models.SnailRecord;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
@@ -31,6 +37,10 @@ public class MapActivity extends BaseActivity {
     private GeoPoint snailLocation;
     private Polyline pathLine;
     private Marker snailMarker;
+    private Marker playerMarker;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private LocationCallback locationCallback;
+    private boolean pause;
 
     // private static final double SNAIL_SPEED_METERS = 0.013; // 0.013 meters/second
     private static final double SNAIL_SPEED_METERS = 13.14;
@@ -64,18 +74,71 @@ public class MapActivity extends BaseActivity {
 
         // Map
         this.mapView = findViewById(R.id.map);
-        this.playerLocation = new GeoPoint(40.4168, -3.7038); // Example: Madrid
-        this.snailLocation = new GeoPoint(40.4188, -3.7020);  // Nearby
+        // TODO: fetch from DB and update it later
+        this.playerLocation = new GeoPoint(40.4168, -3.7038);
+        this.snailLocation = new GeoPoint(40.4188, -3.7020);
 
-        // Load map and plot example data
+        // Load map and plot
         this.loadMap(playerLocation);
 
-        this.addMarker(this.playerLocation, "You", R.drawable.location_pin);
-        this.snailMarker = this.addMarker(this.snailLocation, "Snail", R.drawable.snail);
+        this.playerMarker = this.addMarker(this.playerLocation, "You", R.drawable.location_pin, Marker.ANCHOR_BOTTOM);
+        this.snailMarker = this.addMarker(this.snailLocation, "Snail", R.drawable.snail, Marker.ANCHOR_CENTER);
         this.drawLine();
 
-        // Example of calling update every 3 seconds (simulate movement)
-        this.mapView.postDelayed(this::updateSnailPosition, 3000);
+        // Location provider
+        this.pause = false;
+        this.locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                Location location = locationResult.getLastLocation();
+                if ( location != null ) {
+                    System.out.println("Latitude:  " + location.getLatitude());
+                    System.out.println("Longitude: " + location.getLongitude());
+
+                    playerLocation = new GeoPoint(location.getLatitude(), location.getLongitude());
+                    if ( !pause ) { updateMap(); }
+                } else{
+                    System.out.println("Latitude:  ??");
+                    System.out.println("Longitude: ??");
+                }
+            }
+        };
+        this.fusedLocationProviderClient = MapHelper.genProvider(this, locationCallback);
+
+        // HACK: One-time location to center the map :)
+        final FusedLocationProviderClient[] oneTimeProvider = new FusedLocationProviderClient[1];
+
+        LocationCallback firstLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+
+                // Update and Focus
+                locationCallback.onLocationResult(locationResult);
+                focusOnPlayer();
+
+                if (oneTimeProvider[0] != null) { // Remove this callback
+                    oneTimeProvider[0].removeLocationUpdates(this);
+                }
+            }
+        };
+
+        oneTimeProvider[0] = MapHelper.genProvider(this, firstLocationCallback);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+        pause = false;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+        pause = true;
     }
     private void loadMap(GeoPoint center) {
         this.mapView.setMultiTouchControls(true);
@@ -83,7 +146,7 @@ public class MapActivity extends BaseActivity {
         this.mapView.getController().setCenter(center);
     }
 
-    private Marker addMarker(GeoPoint point, String title, int drawableResId) {
+    private Marker addMarker(GeoPoint point, String title, int drawableResId, float vOffset) {
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setTitle(title);
@@ -97,7 +160,7 @@ public class MapActivity extends BaseActivity {
             marker.setIcon(scaledDrawable);
         }
 
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
+        marker.setAnchor(Marker.ANCHOR_CENTER, vOffset);
         mapView.getOverlays().add( marker);
 
         return marker;
@@ -112,10 +175,10 @@ public class MapActivity extends BaseActivity {
         mapView.getOverlays().add(0, this.pathLine);
 
         double distance = this.playerLocation.distanceToAsDouble(this.snailLocation);
-        this.distanceText.setText(HistoryEntry.roundDistance(distance));
+        this.distanceText.setText(SnailRecord.roundDistance(distance));
     }
 
-    private void updateSnailPosition() {
+    private void updateMap() {
         double distance = snailLocation.distanceToAsDouble(playerLocation);
 
         // Stop if we're already very close
@@ -134,11 +197,9 @@ public class MapActivity extends BaseActivity {
 
         // Update marker and line
         snailMarker.setPosition(snailLocation);
+        playerMarker.setPosition(playerLocation);
         drawLine();
         mapView.invalidate();
-
-        // Schedule next update
-        mapView.postDelayed(this::updateSnailPosition, UPDATE_INTERVAL_MS);
     }
 
     // Move from a start point in a given direction (bearing) for a certain distance in meters

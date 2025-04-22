@@ -54,4 +54,8 @@
     <string name="dialog_register">register</string>
     <string name="focus">focus</string>
     <string name="msg_location_perm">Location permission required to use the map</string>
+    <string name="add_widget" translatable="false">Add widget</string>
+    <string name="app_widget_description" translatable="false">cool snail widget</string>
+    <string name="no_achievements">no achievements</string>
+    <string name="no_runs">no runs</string>
 </resources>

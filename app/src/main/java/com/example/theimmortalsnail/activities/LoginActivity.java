@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.widget.*;
 
 import com.example.theimmortalsnail.R;
+import com.example.theimmortalsnail.helpers.DBHelper;
+import com.example.theimmortalsnail.models.SnailRecord;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -135,7 +137,7 @@ public class LoginActivity extends BaseActivity {
                 if (response.has("user")) {
                     JSONObject user = response.getJSONObject("user");
                     int userId = user.getInt("id");
-                    // TODO poner esto al singletone y q haga su trabajo
+                    DBHelper.setUserId(userId);
                     Toast.makeText(activity, "Login successful", Toast.LENGTH_SHORT).show();
                     activity.openActivity(MainActivity.class);
                     activity.closeActivity();

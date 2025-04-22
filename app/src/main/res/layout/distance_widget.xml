@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.TheImmortalSnail.AppWidget.Container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brown"
+    android:theme="@style/Theme.TheImmortalSnail.AppWidgetContainer">
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageView2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/snail" />
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/appwidget_text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="#99787575"
+        android:contentDescription="@string/app_widget_description"
+        android:gravity="center"
+        android:text="2.3km"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintVertical_bias="1.0" />
+</RelativeLayout>

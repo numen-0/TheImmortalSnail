@@ -1,10 +1,12 @@
 package com.example.theimmortalsnail.helpers;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.os.Looper;
 import android.provider.Settings;
 import android.widget.Toast;
 
@@ -12,6 +14,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.theimmortalsnail.activities.MapActivity;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
 
 public class MapHelper {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1002;
@@ -39,5 +46,20 @@ public class MapHelper {
             Intent intent = new Intent(activity, MapActivity.class);
             activity.startActivity(intent);
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    public static FusedLocationProviderClient genProvider(Activity activity, LocationCallback callback) {
+        FusedLocationProviderClient locationProviderClient = LocationServices.getFusedLocationProviderClient(activity);
+
+        LocationRequest locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000)
+                .setWaitForAccurateLocation(false)
+                .setMinUpdateIntervalMillis(5000)
+                .setMaxUpdateDelayMillis(10000)
+                .build();
+
+        locationProviderClient.requestLocationUpdates(locationRequest, callback, Looper.getMainLooper());
+
+        return locationProviderClient;
     }
 }

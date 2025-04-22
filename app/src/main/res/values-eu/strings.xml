@@ -51,4 +51,6 @@
     <string name="dialog_register">erregistratu</string>
     <string name="focus">zentratu</string>
     <string name="msg_location_perm">Kokapen-baimena beharrezkoa da mapa erabiltzeko.</string>
+    <string name="no_achievements">lorpenik ez</string>
+    <string name="no_runs">historiala hutzik dago</string>
 </resources>

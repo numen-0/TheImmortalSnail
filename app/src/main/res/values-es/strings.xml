@@ -51,4 +51,6 @@
     <string name="dialog_register">registrarse</string>
     <string name="focus">centrar</string>
     <string name="msg_location_perm">Se requiere permiso de ubicación para utilizar el mapa.</string>
+    <string name="no_achievements">sin logros</string>
+    <string name="no_runs">no hay partidas</string>
 </resources>
